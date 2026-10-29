@@ -13,6 +13,7 @@ import type { CartLine, UIDoctor, UIProduct } from "@/lib/types";
 import CartDrawer from "./CartDrawer";
 import ProductModal from "./ProductModal";
 import DoctorModal from "./DoctorModal";
+import AuthModal from "./AuthModal";
 import Toasts from "./Toasts";
 
 type CartState = { items: CartLine[]; subtotal: number; count: number };
@@ -31,6 +32,7 @@ type StoreValue = {
   toggleWishlist: (productId: number) => void;
   openProduct: (product: UIProduct) => void;
   openDoctor: (doctor: UIDoctor) => void;
+  openAuth: () => void;
   pushToast: (message: string, tone?: "success" | "error") => void;
 };
 
@@ -47,6 +49,7 @@ const EMPTY: CartState = { items: [], subtotal: 0, count: 0 };
 export default function StoreProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartState>(EMPTY);
   const [cartOpen, setCartOpen] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
   const [busyProductId, setBusyProductId] = useState<number | null>(null);
   const [product, setProduct] = useState<UIProduct | null>(null);
   const [doctor, setDoctor] = useState<UIDoctor | null>(null);
@@ -142,6 +145,7 @@ export default function StoreProvider({ children }: { children: ReactNode }) {
       toggleWishlist,
       openProduct: (p) => setProduct(p),
       openDoctor: (d) => setDoctor(d),
+      openAuth: () => setAuthOpen(true),
       pushToast,
     }),
     [cart, busyProductId, addToCart, updateQty, removeItem, clearCart, wishlist, toggleWishlist, pushToast],
@@ -153,6 +157,7 @@ export default function StoreProvider({ children }: { children: ReactNode }) {
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
       <ProductModal product={product} onClose={() => setProduct(null)} />
       <DoctorModal doctor={doctor} onClose={() => setDoctor(null)} />
+      <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} />
       <Toasts toasts={toasts} />
     </StoreContext.Provider>
   );

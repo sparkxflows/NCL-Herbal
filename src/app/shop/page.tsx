@@ -6,6 +6,7 @@ import {
   Clock,
   Droplets,
   Flower2,
+  Heart,
   Leaf,
   MoreHorizontal,
   ShieldCheck,
@@ -34,7 +35,11 @@ const CATEGORIES = [
   { icon: MoreHorizontal, label: "More" },
 ];
 
-const HERO_FEATURES = ["100% Natural\nIngredients", "Safe & Effective\nFormulas", "Trusted by\nThousands"];
+const HERO_FEATURES = [
+  { icon: Leaf, label: "100% Natural Ingredients" },
+  { icon: ShieldCheck, label: "Safe & Effective Formulas" },
+  { icon: Heart, label: "Trusted by Thousands" },
+];
 
 export default async function ShopPage() {
   const [productRows, articleRows, testimonialRows, doctorRows] = await Promise.all([
@@ -59,13 +64,13 @@ export default async function ShopPage() {
         <div className="mx-auto grid max-w-[1240px] items-center gap-6 px-4 py-10 md:grid-cols-[1fr_1fr] md:py-12">
           <div className="relative z-10">
             <Reveal>
-              <p className="text-[11px] font-semibold tracking-[0.28em] text-[#6c8374] uppercase">
-                Natural Care <span className="mx-1 text-[#9fc0a2]">•</span> Herbal{" "}
-                <span className="mx-1 text-[#9fc0a2]">•</span> Trusted
+              <p className="text-[11.5px] font-bold tracking-[0.28em] text-[#6c8374] uppercase">
+                Natural Care <span className="mx-1 text-[#9fc0a2]">✦</span> Herbal{" "}
+                <span className="mx-1 text-[#9fc0a2]">✦</span> Trusted
               </p>
             </Reveal>
             <Reveal delay={90}>
-              <h1 className="font-display mt-3 text-[34px] leading-[1.1] font-extrabold tracking-[-0.02em] sm:text-[42px]">
+              <h1 className="font-display mt-3 text-[34px] leading-[1.1] font-extrabold tracking-[-0.02em] text-[#16241d] sm:text-[44px]">
                 Pure Herbal Products
                 <br />
                 <span className="text-[#0d5c37]">for a Healthier You</span>
@@ -78,20 +83,19 @@ export default async function ShopPage() {
               </p>
             </Reveal>
             <Reveal delay={230}>
-              <ul className="mt-5 flex flex-wrap gap-6">
+              <ul className="mt-6 flex flex-wrap items-center gap-4 sm:gap-6">
                 {HERO_FEATURES.map((f) => (
-                  <li key={f} className="group flex items-center gap-2">
-                    <CheckCircle2
-                      size={17}
-                      className="text-[#0d5c37] transition-transform duration-300 group-hover:scale-110"
-                    />
-                    <span className="text-[11.5px] leading-tight font-semibold whitespace-pre-line">{f}</span>
+                  <li key={f.label} className="group flex items-center gap-2">
+                    <span className="grid h-7 w-7 place-items-center rounded-full bg-[#0d5c37]/10 text-[#0d5c37] transition-transform duration-300 group-hover:scale-110">
+                      <f.icon size={15} />
+                    </span>
+                    <span className="text-[11.5px] font-bold text-[#1f3026]">{f.label}</span>
                   </li>
                 ))}
               </ul>
             </Reveal>
             <Reveal delay={300}>
-              <Link href="#popular" className="btn btn-primary mt-6 px-6 py-3 text-[13px]">
+              <Link href="#popular" className="btn btn-primary mt-7 px-7 py-3 text-[13px]">
                 Shop Now <ArrowRight size={14} className="arrow" />
               </Link>
             </Reveal>

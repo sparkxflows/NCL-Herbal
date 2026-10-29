@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Heart, Leaf, Menu, Search, ShieldCheck, ShoppingCart, Truck, User, X } from "lucide-react";
+import { Headphones, Heart, Leaf, Menu, Search, ShieldCheck, ShoppingCart, Truck, User, X } from "lucide-react";
 import Logo from "@/components/ui/Logo";
 import { useStore } from "@/components/store/StoreProvider";
 
@@ -11,19 +11,20 @@ const NAV = [
   { label: "Home", href: "/" },
   { label: "Shop", href: "/shop" },
   { label: "Consult a Doctor", href: "/consult-a-doctor" },
+  { label: "About", href: "/about" },
   { label: "Wellness Journal", href: "/wellness-journal" },
   { label: "Contact", href: "/contact" },
 ];
 
 const TICKER = [
-  { icon: Leaf, text: "100% Natural & Herbal Products" },
+  { icon: ShieldCheck, text: "Secure Checkout" },
   { icon: Truck, text: "Free Shipping on Orders Above ₹500" },
-  { icon: ShieldCheck, text: "Trusted by 50,000+ Customers" },
+  { icon: Headphones, text: "Expert Consultation Support" },
 ];
 
 export default function Header() {
   const pathname = usePathname();
-  const { cart, openCart, wishlist } = useStore();
+  const { cart, openCart, wishlist, openAuth } = useStore();
   const [scrolled, setScrolled] = useState(false);
   const [menu, setMenu] = useState(false);
 
@@ -55,18 +56,10 @@ export default function Header() {
               </span>
             ))}
           </div>
-          <div className="hidden items-center gap-3 whitespace-nowrap md:flex">
-            <Link href="/about" className="transition hover:text-[#bfe6c4]">
-              About Us
-            </Link>
-            <span className="opacity-40">|</span>
-            <Link href="/contact" className="transition hover:text-[#bfe6c4]">
-              Help Center
-            </Link>
-            <span className="opacity-40">|</span>
-            <Link href="/contact" className="transition hover:text-[#bfe6c4]">
-              Contact
-            </Link>
+          <div className="hidden items-center gap-2 whitespace-nowrap text-[11px] font-medium tracking-wide text-white/90 md:flex">
+            <span>Better Health</span>
+            <span className="text-[#96dfa5]">•</span>
+            <span>Naturally</span>
           </div>
         </div>
       </div>
@@ -85,24 +78,30 @@ export default function Header() {
           <Logo />
 
           <nav className="ml-4 hidden items-center gap-6 lg:flex">
-            {NAV.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`nav-link text-[13px] font-semibold ${
-                  isActive(item.href) ? "active text-[#0d5c37]" : "text-[#2c3b33] hover:text-[#0d5c37]"
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {NAV.map((item) => {
+              const active = isActive(item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`relative py-1 text-[13.5px] font-semibold transition ${
+                    active ? "text-[#0d5c37]" : "text-[#2c3b33] hover:text-[#0d5c37]"
+                  }`}
+                >
+                  {item.label}
+                  {active && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-[2.5px] rounded-full bg-[#0d5c37]" />
+                  )}
+                </Link>
+              );
+            })}
           </nav>
 
           <form
             onSubmit={(e) => e.preventDefault()}
             className="ml-auto hidden min-w-0 flex-1 items-center justify-end md:flex"
           >
-            <label className="group flex w-full max-w-[280px] items-center gap-2 rounded-full border border-[#e3ece4] bg-white px-3.5 py-2 transition-all duration-300 focus-within:max-w-[340px] focus-within:border-[#0d5c37] focus-within:shadow-[0_8px_22px_-14px_rgba(13,92,55,0.8)]">
+            <label className="group flex w-full max-w-[280px] items-center gap-2 rounded-full border border-[#e3ece4] bg-[#f9fbf9] px-3.5 py-2 transition-all duration-300 focus-within:max-w-[340px] focus-within:border-[#0d5c37] focus-within:bg-white focus-within:shadow-[0_8px_22px_-14px_rgba(13,92,55,0.8)]">
               <input
                 placeholder="Search for products, health topics..."
                 className="min-w-0 flex-1 bg-transparent text-[12px] outline-none placeholder:text-[#9aa79f]"
@@ -112,13 +111,15 @@ export default function Header() {
           </form>
 
           <div className="ml-auto flex items-center gap-1.5 md:ml-3">
-            <Link
-              href="/consult-a-doctor"
-              aria-label="Account"
+            <button
+              onClick={openAuth}
+              type="button"
+              aria-label="Account Login"
+              title="Sign In / Register"
               className="grid h-9 w-9 place-items-center rounded-full text-[#2c3b33] transition hover:-translate-y-0.5 hover:bg-[#eaf4ea] hover:text-[#0d5c37]"
             >
               <User size={18} />
-            </Link>
+            </button>
             <button
               aria-label="Wishlist"
               className="relative hidden h-9 w-9 place-items-center rounded-full text-[#2c3b33] transition hover:-translate-y-0.5 hover:bg-[#eaf4ea] hover:text-[#0d5c37] sm:grid"

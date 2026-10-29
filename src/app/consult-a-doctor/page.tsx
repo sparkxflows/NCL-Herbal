@@ -44,7 +44,7 @@ export default async function ConsultPage() {
 
         <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[46%] md:block">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/doctor-hero.png" alt="" aria-hidden className="h-full w-full object-cover object-[55%_16%]" />
+          <img src="/images/doctor-hero.png" alt="" aria-hidden className="h-full w-full object-cover object-[center_top]" />
           <span className="absolute inset-0 bg-gradient-to-r from-[#f3faf1] via-[#f3faf1]/25 to-transparent" />
         </div>
 
@@ -94,7 +94,7 @@ export default async function ConsultPage() {
               <img
                 src="/images/doctor-hero.png"
                 alt="Consult an NLC Herbal doctor online"
-                className="mx-auto h-[280px] w-full max-w-[480px] rounded-2xl object-cover object-[55%_14%]"
+                className="mx-auto h-[280px] w-full max-w-[480px] rounded-2xl object-cover object-[center_top]"
               />
             </Reveal>
 

@@ -179,22 +179,19 @@ export default function DoctorDirectory({ doctors }: { doctors: UIDoctor[] }) {
       </section>
 
       {/* meet our doctors */}
-      <section className="bg-white pb-12">
+      <section className="bg-white pb-14">
         <div className="mx-auto max-w-[1240px] px-4">
-          <div className="flex flex-wrap items-end justify-between gap-3">
-            <Reveal>
-              <Eyebrow>Our Doctors</Eyebrow>
-              <SectionTitle className="mt-1">Meet Our Expert Doctors</SectionTitle>
+          <div className="flex flex-wrap items-end justify-between gap-3 text-center sm:text-left">
+            <Reveal className="mx-auto sm:mx-0">
+              <Eyebrow>Consultation Services</Eyebrow>
+              <SectionTitle className="mt-1">Consult Our Doctors</SectionTitle>
               <p className="mt-1.5 text-[12.5px] text-[#5e6f66]">
-                Experienced, certified and caring — your health is in safe hands.
+                Experienced, certified and caring — get direct personalized Ayurvedic guidance.
               </p>
-            </Reveal>
-            <Reveal delay={100}>
-              <ViewAllLink label="View All Doctors" href="#top" />
             </Reveal>
           </div>
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto mt-8 grid max-w-3xl gap-6 sm:grid-cols-2">
             {filtered.map((d, i) => (
               <Reveal key={d.id} delay={i * 90}>
                 <DoctorCard doctor={d} />
@@ -204,7 +201,7 @@ export default function DoctorDirectory({ doctors }: { doctors: UIDoctor[] }) {
 
           {filtered.length === 0 && (
             <p className="mt-8 rounded-xl border border-dashed border-[#d6e4d6] bg-[#f9fcf8] py-10 text-center text-sm text-[#5e6f66]">
-              No doctors matched your search. Try a different speciality.
+              No consultation matched your filter. Please clear search.
             </p>
           )}
         </div>

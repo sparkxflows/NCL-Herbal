@@ -108,3 +108,4 @@ If you have a PostgreSQL database and wish to persist data to the database:
    ```
 
 *Note: If `DATABASE_URL` is omitted, the application runs entirely in memory with seed data, suitable for local preview and development without setting up Postgres.*
+
