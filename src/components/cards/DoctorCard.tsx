@@ -13,12 +13,13 @@ export default function DoctorCard({ doctor }: { doctor: UIDoctor }) {
       onClick={() => openDoctor(doctor)}
       className="card-hover img-zoom group flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-[#e4eee3] bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#0d5c37]/40"
     >
-      <div className="relative h-[210px] overflow-hidden bg-[#eef7ec]">
+      <div className="relative h-[210px] overflow-hidden bg-[#eef7ec]" suppressHydrationWarning>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={doctor.image}
           alt={doctor.name}
           className="h-full w-full object-cover object-[center_top] transition-transform duration-500 group-hover:scale-105"
+          suppressHydrationWarning
         />
         {doctor.available && (
           <span className="absolute top-3 right-3 rounded-full bg-[#0d5c37] px-3 py-1 text-[10.5px] font-bold text-white shadow-md">

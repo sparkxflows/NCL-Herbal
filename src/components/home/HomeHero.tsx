@@ -15,13 +15,14 @@ export default function HomeHero() {
       <Leaf className="animate-floaty pointer-events-none absolute right-[45%] bottom-4 h-20 w-20 rotate-45 text-[#bedcbd]/30" />
 
       {/* full-bleed hero photo (desktop) */}
-      <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[48%] md:block">
+      <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[48%] md:block" suppressHydrationWarning>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/doctor-hero.png"
           alt="NLC Herbal Expert Ayurvedic Doctor"
           aria-hidden
           className="h-full w-full object-cover object-[center_top]"
+          suppressHydrationWarning
         />
         <span className="absolute inset-0 bg-gradient-to-r from-[#eef7ec] via-[#eef7ec]/25 to-transparent" />
       </div>
@@ -77,13 +78,14 @@ export default function HomeHero() {
           </Reveal>
         </div>
 
-        <div className="relative md:min-h-[420px]">
+        <div className="relative md:min-h-[420px]" suppressHydrationWarning>
           <Reveal variant="zoom" delay={120} className="md:hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/doctor-hero.png"
               alt="NLC Herbal Expert Doctor"
               className="mx-auto h-[320px] w-full max-w-[480px] rounded-3xl object-cover object-top shadow-lg"
+              suppressHydrationWarning
             />
           </Reveal>
 

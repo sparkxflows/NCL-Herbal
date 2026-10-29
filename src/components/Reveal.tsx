@@ -48,13 +48,20 @@ export default function Reveal({
   }, [once]);
 
   const variantClass =
-    variant === "left" ? "reveal-left" : variant === "right" ? "reveal-right" : variant === "zoom" ? "reveal-zoom" : "";
+    variant === "left"
+      ? "reveal-left"
+      : variant === "right"
+      ? "reveal-right"
+      : variant === "zoom"
+      ? "reveal-zoom"
+      : "";
 
   return (
     <Tag
       ref={ref}
+      suppressHydrationWarning
       className={`reveal ${variantClass} ${visible ? "is-visible" : ""} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}
     </Tag>

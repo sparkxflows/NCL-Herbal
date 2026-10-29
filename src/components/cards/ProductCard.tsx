@@ -27,9 +27,9 @@ export function ShopProductCard({ product }: { product: UIProduct }) {
         <Heart size={13} className={saved ? "fill-[#0d5c37]" : ""} />
       </button>
 
-      <div className="relative grid h-[150px] place-items-center overflow-hidden bg-[#f6faf5] px-4 pt-4">
+      <div className="relative grid h-[150px] place-items-center overflow-hidden bg-[#f6faf5] px-4 pt-4" suppressHydrationWarning>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={product.image} alt={product.name} className="h-full w-full object-contain" />
+        <img src={product.image} alt={product.name} className="h-full w-full object-contain" suppressHydrationWarning />
         <span className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-full bg-[#0d5c37]/92 py-1.5 text-center text-[10px] font-bold tracking-wide text-white uppercase transition-transform duration-300 group-hover:translate-y-0">
           Quick view
         </span>

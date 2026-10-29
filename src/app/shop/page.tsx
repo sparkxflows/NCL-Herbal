@@ -101,13 +101,14 @@ export default async function ShopPage() {
             </Reveal>
           </div>
 
-          <div className="relative">
+          <div className="relative" suppressHydrationWarning>
             <Reveal variant="zoom" delay={130}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/shop-hero.png"
                 alt="NLC Herbal product range"
                 className="animate-floaty mx-auto h-[250px] w-full max-w-[520px] object-contain md:h-[320px]"
+                suppressHydrationWarning
               />
             </Reveal>
             <Reveal delay={400} className="absolute top-2 right-0 hidden lg:block">
