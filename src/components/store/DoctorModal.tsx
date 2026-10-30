@@ -1,18 +1,31 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { BadgeCheck, CalendarDays, Clock, Globe, GraduationCap, Video } from "lucide-react";
+import { BadgeCheck, CalendarDays, Clock, Globe, GraduationCap, Sparkles, Video } from "lucide-react";
 import Stars from "@/components/ui/Stars";
 import { nextDays } from "@/lib/dates";
 import { rupees, type UIDoctor } from "@/lib/types";
 import Modal from "./Modal";
 import { useStore } from "./StoreProvider";
 
+const CONSULT_CATEGORIES = [
+  "Kidney & Gall Bladder Stone",
+  "Liver Care & Digestion",
+  "Uterus Fibroid & Women's Health",
+  "Infertility & Reproductive Care",
+  "Anxiety, Depression & Mental Health",
+  "Hair Fall & Skin Treatment",
+  "Hernia & Prostate Care",
+  "Cancer Support & Chronic Illness",
+  "General Non-Surgical Holistic Healing",
+];
+
 export default function DoctorModal({ doctor, onClose }: { doctor: UIDoctor | null; onClose: () => void }) {
   const { pushToast } = useStore();
   const days = useMemo(() => nextDays(5), []);
   const [dayIdx, setDayIdx] = useState(0);
   const [slot, setSlot] = useState<string>("");
+  const [category, setCategory] = useState<string>(CONSULT_CATEGORIES[0]);
   const [form, setForm] = useState({ patientName: "", email: "", phone: "", reason: "" });
   const [saving, setSaving] = useState(false);
   const [done, setDone] = useState(false);
@@ -21,6 +34,7 @@ export default function DoctorModal({ doctor, onClose }: { doctor: UIDoctor | nu
     if (doctor) {
       setDayIdx(0);
       setSlot(doctor.slots[0] ?? "");
+      setCategory(CONSULT_CATEGORIES[0]);
       setForm({ patientName: "", email: "", phone: "", reason: "" });
       setDone(false);
     }
@@ -36,11 +50,15 @@ export default function DoctorModal({ doctor, onClose }: { doctor: UIDoctor | nu
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          patientName: form.patientName,
+          email: form.email,
+          phone: form.phone,
           doctorId: doctor.id,
           doctorName: doctor.name,
           appointmentDate: days[dayIdx].full,
           slot,
-          ...form,
+          category,
+          reason: category ? `[Category: ${category}] ${form.reason}`.trim() : form.reason,
         }),
       });
       const data = (await res.json()) as { error?: string };
@@ -76,7 +94,14 @@ export default function DoctorModal({ doctor, onClose }: { doctor: UIDoctor | nu
             <span>({doctor.reviewCount} reviews)</span>
           </div>
 
-          <ul className="mt-4 flex flex-col gap-2 text-[13px] text-[#2c3b33]">
+          <div className="mt-3 rounded-lg border border-[#cfe2ce] bg-white/70 p-2.5 text-[11px] font-medium text-[#16241d]">
+            <span className="font-bold text-[#0d5c37]">New Life Clinic</span> · ALG-21, Pushpa Complex, Hisar
+            <p className="mt-0.5 text-[10.5px] italic text-[#5e6f66]">
+              &ldquo;Complete non-surgical Ayurvedic treatment for physical &amp; mental health disorders&rdquo;
+            </p>
+          </div>
+
+          <ul className="mt-3.5 flex flex-col gap-2 text-[13px] text-[#2c3b33]">
             <li className="flex items-center gap-2">
               <GraduationCap size={15} className="text-[#0d5c37]" /> {doctor.qualifications}
             </li>
@@ -87,15 +112,18 @@ export default function DoctorModal({ doctor, onClose }: { doctor: UIDoctor | nu
               <Globe size={15} className="text-[#0d5c37]" /> {doctor.languages}
             </li>
             <li className="flex items-center gap-2">
-              <Video size={15} className="text-[#0d5c37]" /> Video / Audio call
+              <Video size={15} className="text-[#0d5c37]" /> Video / Audio call · Helpline: 9306737990
             </li>
           </ul>
 
           <p className="mt-4 text-[13px] leading-relaxed text-[#5e6f66]">{doctor.about}</p>
 
-          <div className="mt-4 flex items-center justify-between rounded-xl bg-white/85 px-4 py-3">
-            <span className="text-xs font-semibold text-[#5e6f66]">Consultation fee</span>
-            <span className="font-display text-lg font-extrabold text-[#0d5c37]">{rupees(doctor.fee)}</span>
+          <div className="mt-4 flex items-center justify-between rounded-xl border border-[#cfe2ce] bg-white/95 p-3.5 shadow-sm">
+            <div>
+              <span className="block text-[11px] font-bold uppercase tracking-wider text-[#5e6f66]">Consultation Fee</span>
+              <span className="text-[11px] font-semibold text-[#0d5c37]">Personalized 1-on-1 Session</span>
+            </div>
+            <span className="font-display text-[28px] font-black text-[#0d5c37]">{rupees(doctor.fee)}</span>
           </div>
         </div>
 
@@ -107,8 +135,8 @@ export default function DoctorModal({ doctor, onClose }: { doctor: UIDoctor | nu
                 <CalendarDays size={26} className="text-[#0d5c37]" />
               </div>
               <h4 className="font-display text-xl font-extrabold">Appointment confirmed</h4>
-              <p className="max-w-[320px] text-sm text-[#5e6f66]">
-                {doctor.name} will consult you on <strong>{days[dayIdx].full}</strong> at <strong>{slot}</strong>. A
+              <p className="max-w-[340px] text-sm text-[#5e6f66]">
+                {doctor.name} will consult you for <strong>{category}</strong> on <strong>{days[dayIdx].full}</strong> at <strong>{slot}</strong>. A
                 confirmation has been sent to {form.email}.
               </p>
               <button onClick={onClose} className="btn btn-primary mt-2 px-6 py-2.5 text-sm">
@@ -119,7 +147,30 @@ export default function DoctorModal({ doctor, onClose }: { doctor: UIDoctor | nu
             <form onSubmit={submit} className="flex flex-col gap-4">
               <div>
                 <h4 className="font-display text-lg font-extrabold">Book an Appointment</h4>
-                <p className="text-[13px] text-[#5e6f66]">Choose a date and time that works for you.</p>
+                <p className="text-[13px] text-[#5e6f66]">Choose your health category, date and time that works for you.</p>
+              </div>
+
+              {/* Consultation Category Selection */}
+              <div>
+                <p className="mb-2 flex items-center gap-1.5 text-[11px] font-bold tracking-wide uppercase text-[#16241d]">
+                  <Sparkles size={13} className="text-[#0d5c37]" /> Select Health Concern / Category
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                  {CONSULT_CATEGORIES.map((cat) => (
+                    <button
+                      key={cat}
+                      type="button"
+                      onClick={() => setCategory(cat)}
+                      className={`rounded-lg border px-3 py-2 text-left text-[11.5px] font-semibold transition ${
+                        category === cat
+                          ? "border-[#0d5c37] bg-[#eaf4ea] text-[#0d5c37] ring-1 ring-[#0d5c37]"
+                          : "border-[#e3ece4] bg-white text-[#50635a] hover:border-[#0d5c37]"
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
               </div>
 
               <div>

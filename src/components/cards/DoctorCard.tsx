@@ -32,38 +32,71 @@ export default function DoctorCard({ doctor }: { doctor: UIDoctor }) {
       </div>
 
       <div className="flex flex-1 flex-col p-4">
-        <div className="flex items-start justify-between gap-2">
+        <div className="flex items-start justify-between gap-3 border-b border-[#eef5ee] pb-3">
           <div>
-            <h3 className="font-display text-[15.5px] font-bold text-[#16241d]">{doctor.name}</h3>
-            <p className="mt-0.5 text-[12px] font-medium text-[#0d5c37]">{doctor.specialty}</p>
+            <h3 className="font-display text-[18px] font-extrabold text-[#16241d]">{doctor.name}</h3>
+            <p className="mt-0.5 text-[12.5px] font-semibold text-[#0d5c37]">New Life Clinic · Hisar (Haryana)</p>
           </div>
-          <span className="text-[14px] font-extrabold text-[#0d5c37]">{rupees(doctor.fee)}</span>
+          <div className="text-right">
+            <span className="block text-[10px] font-bold uppercase tracking-wider text-[#697d72]">Fee</span>
+            <span className="font-display text-[26px] sm:text-[30px] font-black leading-none text-[#0d5c37]">
+              {rupees(doctor.fee)}
+            </span>
+          </div>
         </div>
 
-        <div className="mt-2.5 flex items-center gap-1.5 text-[12px]">
-          <Star size={13} className="fill-[#f5a623] text-[#f5a623]" />
-          <span className="font-semibold text-[#16241d]">{doctor.rating}</span>
-          <span className="text-[#5e6f66]">({doctor.reviewCount} reviews)</span>
+        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px]">
+          <div className="flex items-center gap-1.5">
+            <Star size={14} className="fill-[#f5a623] text-[#f5a623]" />
+            <span className="font-bold text-[#16241d]">{doctor.rating}</span>
+            <span className="text-[#0d5c37] font-semibold">({doctor.reviewCount}+ Justdial Reviews)</span>
+          </div>
+          <div className="flex items-center gap-1.5 text-[#5e6f66]">
+            <Award size={14} className="text-[#0d5c37]" />
+            <span>{doctor.experience}</span>
+          </div>
         </div>
 
-        <div className="mt-2 flex items-center gap-1.5 text-[11.5px] text-[#5e6f66]">
-          <Award size={13} className="text-[#0d5c37]" />
-          <span>{doctor.experience}</span>
-        </div>
-
-        <p className="mt-2 line-clamp-2 text-[12px] leading-relaxed text-[#5e6f66]">
+        <p className="mt-2.5 line-clamp-2 text-[12px] leading-relaxed text-[#5e6f66]">
           {doctor.about}
         </p>
+
+        {/* Clinic Motto Banner from visiting card */}
+        <div className="mt-2.5 rounded-lg border border-[#dcecd9] bg-[#f1f8f0] px-3 py-1.5 text-[11px] font-semibold text-[#0d5c37]">
+          🌿 Complete non-surgical Ayurvedic treatment for physical &amp; mental health disorders.
+        </div>
+
+        {/* Health Categories / Specialist In from card */}
+        <div className="mt-3">
+          <p className="text-[10px] font-bold uppercase tracking-wider text-[#697d72] mb-1.5">Specialist Clinical Care:</p>
+          <div className="flex flex-wrap gap-1.5">
+            {[
+              "Liver",
+              "Kidney Stone",
+              "Gall Bladder Stone",
+              "Uterus Fibroid",
+              "Infertility",
+              "Hair Fall",
+              "Anxiety & Depression",
+              "Hernia",
+              "Prostate",
+            ].map((tag) => (
+              <span key={tag} className="rounded-md border border-[#cfe2ce] bg-white px-2 py-0.5 text-[10.5px] font-semibold text-[#0d5c37] shadow-2xs">
+                • {tag}
+              </span>
+            ))}
+          </div>
+        </div>
 
         <button
           onClick={(e) => {
             e.stopPropagation();
             openDoctor(doctor);
           }}
-          className="btn btn-primary mt-4 w-full py-2.5 text-[12.5px] font-bold"
+          className="btn btn-primary mt-4 w-full py-3 text-[13.5px] font-bold shadow-md transition hover:-translate-y-0.5"
         >
-          <CalendarDays size={14} />
-          Book Consultation
+          <CalendarDays size={16} />
+          Book Consultation · {rupees(doctor.fee)}
         </button>
       </div>
     </article>

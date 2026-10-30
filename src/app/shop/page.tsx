@@ -25,21 +25,6 @@ import { toUIArticle, toUIDoctor, toUIProduct, toUITestimonial } from "@/lib/map
 
 export const dynamic = "force-dynamic";
 
-const CATEGORIES = [
-  { icon: Leaf, label: "Herbal Supplements" },
-  { icon: ShieldCheck, label: "Immunity\n& Vitality" },
-  { icon: Droplets, label: "Digestive\nHealth" },
-  { icon: Sparkles, label: "Skin & Hair\nCare" },
-  { icon: Flower2, label: "Ayurvedic\nHerbs" },
-  { icon: Users, label: "Personal Care" },
-  { icon: MoreHorizontal, label: "More" },
-];
-
-const HERO_FEATURES = [
-  { icon: Leaf, label: "100% Natural Ingredients" },
-  { icon: ShieldCheck, label: "Safe & Effective Formulas" },
-  { icon: Heart, label: "Trusted by Thousands" },
-];
 
 export default async function ShopPage() {
   const [productRows, articleRows, testimonialRows, doctorRows] = await Promise.all([
@@ -51,111 +36,97 @@ export default async function ShopPage() {
 
   const products = productRows.map(toUIProduct);
   const popular = products.filter((p) => p.id && p.slug !== "nlc-pure-herbs").slice(0, 5);
-  const bestSellers = products.filter((p) => p.slug !== "kamdev-plus").slice(0, 5);
+  const bestSellers = products.filter((p) => p.id && p.slug !== "nlc-pure-herbs").slice(0, 5);
   const articles = articleRows.map(toUIArticle);
   const testimonials = testimonialRows.map(toUITestimonial);
   const doctors = doctorRows.map(toUIDoctor);
 
   return (
     <>
-      {/* hero */}
-      <section className="hero-grad relative overflow-hidden">
-        <Leaf className="animate-sway absolute -top-4 left-[12%] h-28 w-28 text-[#bedcbd]/35" />
-        <div className="mx-auto grid max-w-[1240px] items-center gap-6 px-4 py-10 md:grid-cols-[1fr_1fr] md:py-12">
-          <div className="relative z-10">
+      {/* hero banner - designed to exactly match the reference banner */}
+      <section className="relative w-full overflow-hidden border-b border-[#dbe8da] bg-gradient-to-r from-[#eef6ec] via-[#f5faf3] to-[#e6f1e4]">
+        <div className="mx-auto grid max-w-[1380px] items-center gap-8 px-4 py-10 sm:py-12 md:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:py-14">
+          {/* Left Column: Authentic Typography & Content */}
+          <div className="relative z-10 flex flex-col justify-center">
             <Reveal>
-              <p className="text-[11.5px] font-bold tracking-[0.28em] text-[#6c8374] uppercase">
-                Natural Care <span className="mx-1 text-[#9fc0a2]">✦</span> Herbal{" "}
-                <span className="mx-1 text-[#9fc0a2]">✦</span> Trusted
+              <p className="text-[12px] font-extrabold tracking-[0.22em] text-[#0d5c37] uppercase">
+                NATURAL CARE <span className="mx-1 text-[#46825c]">•</span> HERBAL{" "}
+                <span className="mx-1 text-[#46825c]">•</span> TRUSTED
               </p>
             </Reveal>
+
             <Reveal delay={90}>
-              <h1 className="font-display mt-3 text-[34px] leading-[1.1] font-extrabold tracking-[-0.02em] text-[#16241d] sm:text-[44px]">
+              <h1 className="font-display mt-3.5 text-[34px] leading-[1.12] font-black tracking-tight text-[#0a3d24] sm:text-[44px] lg:text-[50px]">
                 Pure Herbal Products
                 <br />
-                <span className="text-[#0d5c37]">for a Healthier You</span>
+                <span className="text-[#13613a]">for a Healthier You</span>
               </h1>
             </Reveal>
+
             <Reveal delay={160}>
-              <p className="mt-4 max-w-[430px] text-[13.5px] leading-relaxed text-[#5e6f66]">
+              <p className="mt-4 max-w-[480px] text-[14px] leading-relaxed text-[#485c51] sm:text-[15px]">
                 Discover our wide range of natural and herbal products for better health, stronger immunity and a
                 balanced life.
               </p>
             </Reveal>
+
+            {/* 3 Feature Capsules (Rounded-full pill style as per reference) */}
             <Reveal delay={230}>
-              <ul className="mt-6 flex flex-wrap items-center gap-4 sm:gap-6">
-                {HERO_FEATURES.map((f) => (
-                  <li key={f.label} className="group flex items-center gap-2">
-                    <span className="grid h-7 w-7 place-items-center rounded-full bg-[#0d5c37]/10 text-[#0d5c37] transition-transform duration-300 group-hover:scale-110">
-                      <f.icon size={15} />
-                    </span>
-                    <span className="text-[11.5px] font-bold text-[#1f3026]">{f.label}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="mt-7 flex flex-wrap items-center gap-2.5 sm:gap-3">
+                <div className="flex items-center gap-2 rounded-full border border-[#d2e5d1] bg-white/95 px-4 py-2 shadow-2xs backdrop-blur-xs">
+                  <span className="grid h-6 w-6 place-items-center rounded-full bg-[#0d5c37]/10 text-[#0d5c37]">
+                    <Leaf size={13} />
+                  </span>
+                  <span className="text-[12px] font-bold text-[#1a2d22]">100% Natural Ingredients</span>
+                </div>
+
+                <div className="flex items-center gap-2 rounded-full border border-[#d2e5d1] bg-white/95 px-4 py-2 shadow-2xs backdrop-blur-xs">
+                  <span className="grid h-6 w-6 place-items-center rounded-full bg-[#0d5c37]/10 text-[#0d5c37]">
+                    <ShieldCheck size={13} />
+                  </span>
+                  <span className="text-[12px] font-bold text-[#1a2d22]">Safe &amp; Effective Formulas</span>
+                </div>
+
+                <div className="flex items-center gap-2 rounded-full border border-[#d2e5d1] bg-white/95 px-4 py-2 shadow-2xs backdrop-blur-xs">
+                  <span className="grid h-6 w-6 place-items-center rounded-full bg-[#0d5c37]/10 text-[#0d5c37]">
+                    <Heart size={13} />
+                  </span>
+                  <span className="text-[12px] font-bold text-[#1a2d22]">Trusted by Thousands</span>
+                </div>
+              </div>
             </Reveal>
+
+            {/* Interactive Shop Now Button (Dark green rounded-full pill) */}
             <Reveal delay={300}>
-              <Link href="#popular" className="btn btn-primary mt-7 px-7 py-3 text-[13px]">
-                Shop Now <ArrowRight size={14} className="arrow" />
-              </Link>
-            </Reveal>
-          </div>
-
-          <div className="relative" suppressHydrationWarning>
-            <Reveal variant="zoom" delay={130}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/shop-hero.png"
-                alt="NLC Herbal product range"
-                className="animate-floaty mx-auto h-[250px] w-full max-w-[520px] object-contain md:h-[320px]"
-                suppressHydrationWarning
-              />
-            </Reveal>
-            <Reveal delay={400} className="absolute top-2 right-0 hidden lg:block">
-              <p className="script text-right text-[26px] leading-[1.05] font-semibold text-[#0d5c37]">
-                Nature
-                <br />
-                Heals
-                <br />
-                Better
-              </p>
-              <svg width="96" height="22" viewBox="0 0 96 22" fill="none" className="ml-auto">
-                <path d="M4 15C24 5 56 2 86 8" stroke="#0d5c37" strokeWidth="1.5" strokeLinecap="round" className="draw-line" />
-                <path d="M86 8c3-3 7-4 9-3-3 2-5 4-6 8-1-2-2-4-3-5Z" fill="#2e9b4f" />
-              </svg>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* shop by category */}
-      <section className="bg-white py-11">
-        <div className="mx-auto max-w-[1240px] px-4">
-          <Reveal className="text-center">
-            <SectionTitle>Shop by Category</SectionTitle>
-            <p className="mt-1.5 text-[12.5px] text-[#5e6f66]">Find the right product for your health and wellness</p>
-          </Reveal>
-          <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
-            {CATEGORIES.map((c, i) => (
-              <Reveal key={c.label} delay={i * 65}>
+              <div className="mt-8 flex items-center gap-4">
                 <Link
                   href="#popular"
-                  className="card-hover group flex h-full flex-col items-center justify-center gap-2.5 rounded-xl border border-[#e4eee3] bg-[#f6faf5] px-3 py-6 text-center"
+                  className="inline-flex items-center gap-2.5 rounded-full bg-[#0a472a] px-8 py-3.5 text-[14px] font-bold text-white shadow-md transition-all duration-300 hover:scale-105 hover:bg-[#07351d] hover:shadow-lg active:scale-95"
                 >
-                  <span className="grid h-10 w-10 place-items-center rounded-full bg-white text-[#0d5c37] shadow-sm transition-transform duration-300 group-hover:-translate-y-1 group-hover:bg-[#0d5c37] group-hover:text-white">
-                    <c.icon size={18} />
-                  </span>
-                  <span className="text-[11.5px] leading-tight font-semibold whitespace-pre-line">{c.label}</span>
+                  <span>Shop Now</span>
+                  <ArrowRight size={16} />
                 </Link>
-              </Reveal>
-            ))}
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Right Column: Exact Reference Graphic Scene (Kamdev tubs, Nature Heals Better, Mortar & Plants) */}
+          <div className="relative flex flex-col items-center justify-center lg:items-end">
+            <Reveal delay={140} className="relative w-full max-w-[620px]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/shop-hero-exact.png"
+                alt="NLC Herbal Kamdev Power & Formulations - Nature Heals Better"
+                className="h-auto w-full object-contain object-right-bottom transition-transform duration-700 ease-out hover:scale-[1.01]"
+              />
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* popular */}
-      <section id="popular" className="scroll-mt-28 bg-white pb-12">
-        <div className="mx-auto max-w-[1240px] px-4">
+      {/* popular on shop - second section immediately following hero */}
+      <section id="popular" className="scroll-mt-28 bg-white py-12 sm:py-14">
+        <div className="mx-auto max-w-[1380px] px-4">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <Reveal>
               <Eyebrow>Featured Products</Eyebrow>
@@ -165,30 +136,30 @@ export default async function ShopPage() {
               </p>
             </Reveal>
             <Reveal delay={100}>
-              <ViewAllLink label="View All Products" href="#best-sellers" />
+              <ViewAllLink label="View All Products" href="/products" />
             </Reveal>
           </div>
 
-          <Reveal className="mt-6" delay={80}>
-            <Carousel itemClass="w-[205px]">
-              {popular.map((p) => (
-                <ShopProductCard key={p.id} product={p} />
-              ))}
-            </Carousel>
-          </Reveal>
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-5">
+            {popular.map((p, i) => (
+              <Reveal key={p.id} delay={i * 70}>
+                <ShopProductCard product={p} />
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* consult banner */}
       <section className="bg-white pb-12">
-        <div className="mx-auto max-w-[1240px] px-4">
+        <div className="mx-auto max-w-[1380px] px-4">
           <Reveal variant="zoom">
             <div className="relative overflow-hidden rounded-2xl border border-[#dcecd9] bg-gradient-to-r from-[#e9f5e7] via-[#eef8ec] to-[#e3f1e1]">
               <Leaf className="animate-sway absolute -top-2 right-[6%] h-24 w-24 text-[#9fc9a1]/30" />
               <div className="grid items-center gap-6 p-6 md:grid-cols-[0.8fr_1.3fr_0.9fr] md:p-8">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/doctor-hero.png"
+                  src="/images/doctor-consulting.jpg"
                   alt="Consult a doctor"
                   className="hidden h-[230px] w-full rounded-2xl object-cover object-top md:block"
                 />
@@ -240,7 +211,7 @@ export default async function ShopPage() {
 
       {/* best sellers */}
       <section id="best-sellers" className="scroll-mt-28 bg-white pb-12">
-        <div className="mx-auto max-w-[1240px] px-4">
+        <div className="mx-auto max-w-[1380px] px-4">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <Reveal>
               <Eyebrow>Best Sellers</Eyebrow>
@@ -248,11 +219,11 @@ export default async function ShopPage() {
               <p className="mt-1.5 text-[12.5px] text-[#5e6f66]">Highly rated and trusted by our customers.</p>
             </Reveal>
             <Reveal delay={100}>
-              <ViewAllLink label="View All" href="#popular" />
+              <ViewAllLink label="View All Products" href="/products" />
             </Reveal>
           </div>
 
-          <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-5">
             {bestSellers.map((p, i) => (
               <Reveal key={p.id} delay={i * 85}>
                 <ShopProductCard product={p} />
@@ -264,7 +235,7 @@ export default async function ShopPage() {
 
       {/* wellness journal */}
       <section className="bg-white pb-14">
-        <div className="mx-auto max-w-[1240px] px-4">
+        <div className="mx-auto max-w-[1380px] px-4">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <Reveal>
               <SectionTitle>Wellness Journal</SectionTitle>

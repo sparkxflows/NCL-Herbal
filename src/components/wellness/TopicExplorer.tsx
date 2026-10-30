@@ -33,7 +33,7 @@ export default function TopicExplorer({ articles }: { articles: UIArticle[] }) {
 
   return (
     <section className="bg-white py-11">
-      <div className="mx-auto max-w-[1240px] px-4">
+      <div className="mx-auto max-w-[1380px] px-4">
         <div className="grid items-start gap-6 lg:grid-cols-[1.5fr_0.85fr]">
           <Reveal>
             <Eyebrow>Wellness Journey</Eyebrow>

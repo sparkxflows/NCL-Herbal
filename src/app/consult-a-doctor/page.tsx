@@ -4,7 +4,6 @@ import {
   CalendarDays,
   ClipboardCheck,
   Heart,
-  Leaf,
   ShieldCheck,
   UserRound,
   Video,
@@ -17,13 +16,6 @@ import { getDoctors } from "@/lib/data";
 import { toUIDoctor } from "@/lib/map";
 
 export const dynamic = "force-dynamic";
-
-const HERO_CHIPS = [
-  { icon: UserRound, label: "Qualified\nDoctors" },
-  { icon: ClipboardCheck, label: "Convenient\nOnline Booking" },
-  { icon: ShieldCheck, label: "Safe & Secure\nConsultation" },
-  { icon: CalendarDays, label: "Personalized\nHealth Guidance" },
-];
 
 const STEPS = [
   { icon: CalendarDays, title: "Choose a Doctor", sub: "Select your preferred\nspecialist and time." },
@@ -38,98 +30,179 @@ export default async function ConsultPage() {
 
   return (
     <>
-      {/* hero */}
-      <section id="top" className="hero-grad relative overflow-hidden">
-        <Leaf className="animate-sway absolute bottom-6 left-[6%] h-32 w-32 text-[#bedcbd]/35" />
-
-        <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[46%] md:block">
+      {/* Consult a Doctor Hero - Recreated Element by Element with Real UI Components */}
+      <section id="top" className="relative w-full overflow-hidden border-b border-[#dbe8da] bg-gradient-to-r from-[#eef6ec] via-[#f7faf5] to-[#e4efe2] min-h-[460px] sm:min-h-[480px] lg:min-h-[500px] xl:min-h-[520px] flex items-center">
+        {/* Subtle decorative green leaves framing on far left */}
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 z-30 w-[60px] sm:w-[85px] lg:w-[110px] select-none">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/doctor-hero.png" alt="" aria-hidden className="h-full w-full object-cover object-[center_top]" />
-          <span className="absolute inset-0 bg-gradient-to-r from-[#f3faf1] via-[#f3faf1]/25 to-transparent" />
+          <img
+            src="/images/wellness-leaves-left.png"
+            alt=""
+            className="h-full w-full object-cover object-left opacity-90"
+          />
         </div>
 
-        <div className="mx-auto grid max-w-[1240px] items-center gap-6 px-4 py-10 md:grid-cols-[1.08fr_0.92fr]">
-          <div className="relative z-10">
-            <Reveal>
-              <p className="text-[11px] font-semibold tracking-[0.26em] text-[#6c8374] uppercase">
-                Expert Care <span className="mx-1 text-[#9fc0a2]">•</span> Better Health{" "}
-                <span className="mx-1 text-[#9fc0a2]">•</span> Naturally
-              </p>
-            </Reveal>
-            <Reveal delay={90}>
-              <h1 className="font-display mt-3 text-[32px] leading-[1.1] font-extrabold tracking-[-0.02em] sm:text-[40px]">
-                <span className="text-[#0d5c37]">Consult a Doctor</span>
-                <br />
-                From the Comfort of Home
-              </h1>
-            </Reveal>
-            <Reveal delay={160}>
-              <p className="mt-4 max-w-[420px] text-[13.5px] leading-relaxed text-[#5e6f66]">
-                Get professional medical advice from qualified doctors and take the first step towards a healthier you.
-              </p>
-            </Reveal>
-            <Reveal delay={230}>
-              <ul className="mt-5 flex flex-wrap gap-2.5">
-                {HERO_CHIPS.map((c) => (
-                  <li
-                    key={c.label}
-                    className="card-hover flex items-center gap-2 rounded-lg border border-[#dfeedd] bg-white/80 px-3 py-2.5"
-                  >
-                    <c.icon size={16} className="shrink-0 text-[#0d5c37]" />
-                    <span className="text-[11px] leading-tight font-semibold whitespace-pre-line">{c.label}</span>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-            <Reveal delay={300}>
-              <div className="mt-6">
-                <BookDoctorButton doctor={doctors[0] ?? null} label="Book an Appointment" />
+        {/* Center-Right Doctor Visual (Dr. N.K. Sharma standing on bottom edge with generous headroom) */}
+        <div className="absolute right-[8%] sm:right-[14%] lg:right-[18%] xl:right-[20%] bottom-0 top-0 w-[280px] sm:w-[360px] lg:w-[440px] xl:w-[480px] pointer-events-none flex items-end justify-center overflow-hidden z-10 pt-4 sm:pt-6 lg:pt-8">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/doctor-sharp-portrait.png"
+            alt="Dr. N.K. Sharma - Senior Ayurvedic Specialist"
+            className="h-[320px] sm:h-[400px] lg:h-[95%] xl:h-[96%] w-auto max-w-full object-contain object-bottom select-none translate-y-1"
+          />
+        </div>
+
+        {/* Subtle decorative green leaves framing on far right */}
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 z-30 w-[60px] sm:w-[85px] lg:w-[110px] select-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/wellness-leaves-right.png"
+            alt=""
+            className="h-full w-full object-cover object-right opacity-90"
+          />
+        </div>
+
+        {/* Handwritten Decorative Script Doodle on Upper-Right */}
+        <div className="absolute right-6 sm:right-10 lg:right-14 xl:right-18 top-6 sm:top-9 lg:top-10 z-20 pointer-events-none select-none text-right">
+          <p className="script text-[#166a3d] text-[30px] sm:text-[36px] lg:text-[40px] font-bold leading-[1.05] rotate-[-5deg] drop-shadow-2xs">
+            Your Health
+            <br />
+            Our Priority{" "}
+            <span className="inline-block text-[#2e9b4f] text-[22px] rotate-[15deg]">🍃</span>
+          </p>
+        </div>
+
+        {/* Floating Trust Information Panel on Lower-Right */}
+        <div className="absolute right-6 sm:right-10 lg:right-14 xl:right-18 bottom-6 sm:bottom-8 z-20 hidden sm:block">
+          <div className="flex flex-col gap-2.5 rounded-2xl border border-[#cfe2ce] bg-white/95 p-3.5 sm:p-4 shadow-sm backdrop-blur-xs w-[220px] sm:w-[240px]">
+            {/* Online Consultations */}
+            <div className="flex items-center gap-3">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[#eaf4ea] text-[#0d5c37]">
+                <Video size={17} />
+              </span>
+              <div>
+                <h4 className="text-[12px] font-extrabold text-[#16241d] leading-tight">Online Consultations</h4>
+                <p className="text-[10px] font-semibold text-[#5e6f66] leading-tight mt-0.5">Video / Audio Call</p>
               </div>
-            </Reveal>
+            </div>
+
+            <div className="h-px w-full bg-[#e8f0e7]" />
+
+            {/* Secure & Private */}
+            <div className="flex items-center gap-3">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[#eaf4ea] text-[#0d5c37]">
+                <ShieldCheck size={17} />
+              </span>
+              <div>
+                <h4 className="text-[12px] font-extrabold text-[#16241d] leading-tight">Secure &amp; Private</h4>
+                <p className="text-[10px] font-semibold text-[#5e6f66] leading-tight mt-0.5">Your data is safe with us</p>
+              </div>
+            </div>
           </div>
+        </div>
 
-          <div className="relative md:min-h-[380px]">
-            <Reveal variant="zoom" delay={130} className="md:hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/doctor-hero.png"
-                alt="Consult an NLC Herbal doctor online"
-                className="mx-auto h-[280px] w-full max-w-[480px] rounded-2xl object-cover object-[center_top]"
+        {/* Left Side Content */}
+        <div className="relative z-20 w-full lg:w-[50%] xl:w-[48%] pl-6 sm:pl-12 lg:pl-16 xl:pl-24 pr-4 py-10 sm:py-14 lg:py-16">
+          <Reveal>
+            <p className="text-[11px] sm:text-[11.5px] font-extrabold tracking-[0.22em] text-[#0d5c37] uppercase">
+              EXPERT CARE <span className="mx-1 text-[#46825c]">•</span> BETTER HEALTH <span className="mx-1 text-[#46825c]">•</span> NATURALLY
+            </p>
+          </Reveal>
+
+          <Reveal delay={90}>
+            <h1 className="font-display mt-3 text-[30px] sm:text-[38px] lg:text-[44px] xl:text-[48px] font-black leading-[1.14] tracking-tight text-[#0a3d24]">
+              Consult a Doctor
+              <br />
+              <span className="text-[#16241d]">From the Comfort of Home</span>
+            </h1>
+          </Reveal>
+
+          <Reveal delay={160}>
+            <p className="mt-3.5 max-w-[460px] text-[13.5px] sm:text-[14.5px] leading-relaxed text-[#4d6054]">
+              Get professional medical advice from qualified doctors and take the first step towards a healthier you.
+            </p>
+          </Reveal>
+
+          {/* 4 Feature Badges in ONE SINGLE HORIZONTAL ROW */}
+          <Reveal delay={230}>
+            <div className="mt-7 flex flex-wrap lg:flex-nowrap items-center gap-2.5 sm:gap-3">
+              <div className="flex items-center gap-2 rounded-2xl border border-[#cfe2ce] bg-white/95 px-3 py-2 shadow-2xs backdrop-blur-xs">
+                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#0d5c37]/10 text-[#0d5c37]">
+                  <UserRound size={14} />
+                </span>
+                <span className="text-[11px] font-bold leading-tight text-[#1a2d22] whitespace-nowrap">
+                  Qualified
+                  <br />
+                  Doctors
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2 rounded-2xl border border-[#cfe2ce] bg-white/95 px-3 py-2 shadow-2xs backdrop-blur-xs">
+                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#0d5c37]/10 text-[#0d5c37]">
+                  <CalendarCheck size={14} />
+                </span>
+                <span className="text-[11px] font-bold leading-tight text-[#1a2d22] whitespace-nowrap">
+                  Convenient
+                  <br />
+                  Online Booking
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2 rounded-2xl border border-[#cfe2ce] bg-white/95 px-3 py-2 shadow-2xs backdrop-blur-xs">
+                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#0d5c37]/10 text-[#0d5c37]">
+                  <ShieldCheck size={14} />
+                </span>
+                <span className="text-[11px] font-bold leading-tight text-[#1a2d22] whitespace-nowrap">
+                  Safe &amp; Secure
+                  <br />
+                  Consultation
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2 rounded-2xl border border-[#cfe2ce] bg-white/95 px-3 py-2 shadow-2xs backdrop-blur-xs">
+                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#0d5c37]/10 text-[#0d5c37]">
+                  <CalendarDays size={14} />
+                </span>
+                <span className="text-[11px] font-bold leading-tight text-[#1a2d22] whitespace-nowrap">
+                  Personalized
+                  <br />
+                  Health Guidance
+                </span>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Action CTA Button */}
+          <Reveal delay={300}>
+            <div className="mt-7">
+              <BookDoctorButton
+                doctor={doctors[0] ?? null}
+                label="Book an Appointment"
+                className="inline-flex items-center gap-2.5 rounded-full bg-[#0a472a] hover:bg-[#07351d] text-white px-7 sm:px-8 py-3.5 text-[14px] font-bold shadow-md transition-all duration-300 hover:scale-105 active:scale-95"
               />
-            </Reveal>
+            </div>
+          </Reveal>
 
-            <Reveal delay={360} className="absolute top-3 right-1 z-10 hidden lg:block">
-              <p className="script text-right text-[25px] leading-[1.05] font-semibold text-[#0d5c37]">
-                Your Health
-                <br />
-                Our Priority
-              </p>
-              <svg width="100" height="22" viewBox="0 0 100 22" fill="none" className="ml-auto">
-                <path d="M4 15C26 5 58 2 88 8" stroke="#0d5c37" strokeWidth="1.5" strokeLinecap="round" className="draw-line" />
-                <path d="M88 8c3-3 7-4 9-3-3 2-5 4-6 8-1-2-2-4-3-5Z" fill="#2e9b4f" />
-              </svg>
-            </Reveal>
-
-            <Reveal delay={450} className="absolute right-0 bottom-2 z-10 hidden w-[230px] flex-col gap-2 lg:flex">
-              {[
-                { icon: Video, title: "Online Consultations", sub: "Video / Audio Call" },
-                { icon: ShieldCheck, title: "Secure & Private", sub: "Your data is safe with us" },
-              ].map((c) => (
-                <div
-                  key={c.title}
-                  className="card-hover flex items-center gap-2.5 rounded-xl bg-white/95 px-4 py-3 shadow-[0_14px_30px_-20px_rgba(7,37,26,0.7)]"
-                >
-                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[#eaf4ea] text-[#0d5c37]">
-                    <c.icon size={15} />
-                  </span>
-                  <span className="text-[11.5px] leading-tight font-bold">
-                    {c.title}
-                    <br />
-                    <span className="font-medium text-[#5e6f66]">{c.sub}</span>
-                  </span>
-                </div>
-              ))}
-            </Reveal>
+          {/* Mobile view of trust badges */}
+          <div className="mt-5 grid grid-cols-2 gap-2.5 sm:hidden">
+            <div className="flex items-center gap-2 rounded-xl border border-[#cfe2ce] bg-white/95 p-2.5 shadow-2xs">
+              <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-[#eaf4ea] text-[#0d5c37]">
+                <Video size={14} />
+              </span>
+              <div>
+                <h4 className="text-[11px] font-bold text-[#16241d] leading-tight">Online Consultations</h4>
+                <p className="text-[9.5px] text-[#5e6f66]">Video / Audio Call</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 rounded-xl border border-[#cfe2ce] bg-white/95 p-2.5 shadow-2xs">
+              <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-[#eaf4ea] text-[#0d5c37]">
+                <ShieldCheck size={14} />
+              </span>
+              <div>
+                <h4 className="text-[11px] font-bold text-[#16241d] leading-tight">Secure &amp; Private</h4>
+                <p className="text-[9.5px] text-[#5e6f66]">100% Confidential</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

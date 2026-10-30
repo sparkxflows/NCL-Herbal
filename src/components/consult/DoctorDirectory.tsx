@@ -59,10 +59,10 @@ export default function DoctorDirectory({ doctors }: { doctors: UIDoctor[] }) {
     <>
       {/* find the right doctor */}
       <section className="bg-white py-11">
-        <div className="mx-auto grid max-w-[1240px] items-start gap-7 px-4 lg:grid-cols-[1.25fr_0.9fr]">
+        <div className="mx-auto grid max-w-[1380px] items-start gap-7 px-4 lg:grid-cols-[1.25fr_0.9fr]">
           <Reveal>
-            <Eyebrow>Our Doctors</Eyebrow>
-            <SectionTitle className="mt-1.5">Find the Right Doctor for You</SectionTitle>
+            <Eyebrow>Expert Consultation</Eyebrow>
+            <SectionTitle className="mt-1.5">Consult Our Doctor</SectionTitle>
             <p className="mt-2 max-w-[430px] text-[13px] leading-relaxed text-[#5e6f66]">
               Choose from our experienced doctors and book your consultation in just a few simple steps.
             </p>
@@ -134,7 +134,7 @@ export default function DoctorDirectory({ doctors }: { doctors: UIDoctor[] }) {
 
       {/* popular specialties */}
       <section className="bg-white pb-11">
-        <div className="mx-auto max-w-[1240px] px-4">
+        <div className="mx-auto max-w-[1380px] px-4">
           <div className="flex items-end justify-between gap-3">
             <Reveal>
               <Eyebrow>Popular Specialties</Eyebrow>
@@ -180,18 +180,18 @@ export default function DoctorDirectory({ doctors }: { doctors: UIDoctor[] }) {
 
       {/* meet our doctors */}
       <section className="bg-white pb-14">
-        <div className="mx-auto max-w-[1240px] px-4">
+        <div className="mx-auto max-w-[1380px] px-4">
           <div className="flex flex-wrap items-end justify-between gap-3 text-center sm:text-left">
             <Reveal className="mx-auto sm:mx-0">
-              <Eyebrow>Consultation Services</Eyebrow>
-              <SectionTitle className="mt-1">Consult Our Doctors</SectionTitle>
+              <Eyebrow>Expert Consultation</Eyebrow>
+              <SectionTitle className="mt-1">Consult Our Doctor</SectionTitle>
               <p className="mt-1.5 text-[12.5px] text-[#5e6f66]">
                 Experienced, certified and caring — get direct personalized Ayurvedic guidance.
               </p>
             </Reveal>
           </div>
 
-          <div className="mx-auto mt-8 grid max-w-3xl gap-6 sm:grid-cols-2">
+          <div className="mx-auto mt-8 max-w-xl">
             {filtered.map((d, i) => (
               <Reveal key={d.id} delay={i * 90}>
                 <DoctorCard doctor={d} />

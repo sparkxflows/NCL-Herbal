@@ -31,77 +31,138 @@ export default async function WellnessPage() {
 
   return (
     <>
-      {/* hero */}
-      <section className="hero-grad relative overflow-hidden">
-        <Leaf className="animate-sway absolute top-8 -left-4 h-32 w-32 text-[#bedcbd]/35" />
-        <Leaf className="animate-floaty absolute right-4 bottom-6 h-24 w-24 rotate-45 text-[#bedcbd]/30" />
-        <div className="mx-auto grid max-w-[1240px] items-center gap-6 px-4 py-10 md:grid-cols-[1.05fr_0.95fr]">
-          <div className="relative z-10">
-            <Reveal>
-              <p className="text-[11px] font-semibold tracking-[0.26em] text-[#6c8374] uppercase">
-                Small Steps <span className="mx-1 text-[#9fc0a2]">•</span> Healthier You
-              </p>
-            </Reveal>
-            <Reveal delay={90}>
-              <h1 className="font-display mt-3 text-[33px] leading-[1.12] font-extrabold tracking-[-0.02em] sm:text-[42px]">
-                Your Wellness
-                <br />
-                Journey{" "}
-                <span className="script align-baseline text-[42px] font-semibold text-[#0d5c37] sm:text-[52px]">
-                  Starts Here
-                </span>
-              </h1>
-            </Reveal>
-            <Reveal delay={160}>
-              <p className="mt-4 max-w-[420px] text-[13.5px] leading-relaxed text-[#5e6f66]">
-                Better habits. Balanced living. Natural care.
-                <br />
-                Explore expert guidance, helpful resources and simple steps to live a healthier, happier you.
-              </p>
-            </Reveal>
-            <Reveal delay={230}>
-              <Link href="#explore" className="btn btn-primary mt-6 px-6 py-3 text-[13px]">
-                Start Your Journey <ArrowRight size={14} className="arrow" />
-              </Link>
-            </Reveal>
-            <Reveal delay={300}>
-              <ul className="mt-7 flex flex-wrap gap-6">
-                {HERO_FEATURES.map((f) => (
-                  <li key={f.label} className="group flex items-center gap-2">
-                    <f.icon
-                      size={18}
-                      className="text-[#0d5c37] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110"
-                    />
-                    <span className="text-[11px] leading-tight font-semibold whitespace-pre-line">{f.label}</span>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          </div>
+      {/* Wellness Hero - Recreated 1:1 Fresh from Reference Banner */}
+      <section id="top" className="relative w-full overflow-hidden border-b border-[#dbe8da] bg-gradient-to-r from-[#eef6ec] via-[#f7faf5] to-[#e8f1e6] min-h-[460px] sm:min-h-[480px] lg:min-h-[500px] xl:min-h-[520px] flex items-center">
+        {/* Realistic green leaves framing on the far left edge */}
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 z-30 w-[60px] sm:w-[90px] lg:w-[110px] select-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/wellness-leaves-left.png"
+            alt=""
+            className="h-full w-full object-cover object-left opacity-90"
+          />
+        </div>
 
-          <div className="relative">
-            <Reveal variant="zoom" delay={130}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={PX.meditateGarden}
-                alt="Woman meditating outdoors"
-                className="mx-auto h-[260px] w-full max-w-[520px] rounded-2xl object-cover md:h-[330px]"
-              />
-            </Reveal>
-            <Reveal delay={400} className="absolute top-2 right-0 hidden lg:block">
-              <p className="script text-right text-[25px] leading-[1.08] font-semibold text-[#0d5c37]">
-                Healthy
-                <br />
-                Habits
-                <br />
-                Happy Life
-              </p>
-              <svg width="100" height="22" viewBox="0 0 100 22" fill="none" className="ml-auto">
-                <path d="M4 15C26 5 58 2 88 8" stroke="#0d5c37" strokeWidth="1.5" strokeLinecap="round" className="draw-line" />
-                <path d="M88 8c3-3 7-4 9-3-3 2-5 4-6 8-1-2-2-4-3-5Z" fill="#2e9b4f" />
-              </svg>
-            </Reveal>
-          </div>
+        {/* Right Side Visual - Meditating woman extending seamlessly to the bottom edge with comfortable head space */}
+        <div className="absolute right-0 bottom-0 top-0 w-full lg:w-[56%] xl:w-[54%] pointer-events-none flex items-end justify-end overflow-hidden z-10 pt-4 sm:pt-6 lg:pt-8">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/wellness-hero-photo.png"
+            alt="Woman in meditation lotus pose in lush green nature"
+            className="h-[330px] sm:h-[420px] lg:h-[95%] xl:h-[96%] max-w-full lg:max-w-none w-auto object-contain object-bottom select-none translate-y-1"
+          />
+        </div>
+
+        {/* Realistic green leaves framing on the far right edge */}
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 z-30 w-[60px] sm:w-[90px] lg:w-[110px] select-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/wellness-leaves-right.png"
+            alt=""
+            className="h-full w-full object-cover object-right opacity-90"
+          />
+        </div>
+
+        {/* Handwritten Decorative Text on Upper-Right */}
+        <div className="absolute right-6 sm:right-12 lg:right-20 xl:right-24 top-6 sm:top-10 lg:top-12 z-20 pointer-events-none select-none text-right">
+          <p className="script text-[#166a3d] text-[32px] sm:text-[38px] lg:text-[44px] font-bold leading-[1.05] rotate-[-5deg] drop-shadow-2xs">
+            Healthy
+            <br />
+            Habits
+            <br />
+            Happy Life{" "}
+            <span className="inline-block text-[#2e9b4f] text-[24px] rotate-[15deg]">🍃</span>
+          </p>
+        </div>
+
+        {/* Left Side Content */}
+        <div className="relative z-20 w-full lg:w-[48%] xl:w-[46%] pl-6 sm:pl-12 lg:pl-16 xl:pl-24 pr-4 py-10 sm:py-14 lg:py-16">
+          <Reveal>
+            <p className="text-[11px] sm:text-[12px] font-extrabold tracking-[0.24em] text-[#0d5c37] uppercase">
+              SMALL STEPS <span className="mx-1 text-[#46825c]">•</span> HEALTHIER YOU
+            </p>
+          </Reveal>
+
+          <Reveal delay={90}>
+            <h1 className="font-display mt-3 text-[32px] sm:text-[42px] lg:text-[48px] xl:text-[52px] font-black leading-[1.12] tracking-tight text-[#0a3d24]">
+              Your Wellness
+              <br />
+              Journey{" "}
+              <span className="script text-[44px] sm:text-[54px] lg:text-[62px] xl:text-[68px] font-bold text-[#166a3d] align-baseline">
+                Starts Here
+              </span>
+            </h1>
+          </Reveal>
+
+          <Reveal delay={160}>
+            <p className="mt-3.5 max-w-[460px] text-[13.5px] sm:text-[14.5px] leading-relaxed text-[#4d6054]">
+              Better habits. Balanced life. Natural care.
+              <br className="hidden sm:inline" />
+              Explore expert guidance, helpful resources and simple steps to live a healthier, happier you.
+            </p>
+          </Reveal>
+
+          {/* Dark Forest-Green CTA Button */}
+          <Reveal delay={230}>
+            <div className="mt-6 sm:mt-7">
+              <Link
+                href="#explore"
+                className="inline-flex items-center gap-2.5 rounded-full bg-[#0a472a] hover:bg-[#07351d] text-white px-7 sm:px-8 py-3.5 text-[14px] font-bold shadow-md transition-all duration-300 hover:scale-105 active:scale-95"
+              >
+                <span>Start Your Journey</span>
+                <ArrowRight size={15} />
+              </Link>
+            </div>
+          </Reveal>
+
+          {/* Four Feature Items in a Horizontal Row */}
+          <Reveal delay={300}>
+            <div className="mt-8 flex flex-wrap items-center gap-5 sm:gap-7 pt-1">
+              <div className="flex items-center gap-2">
+                <span className="text-[#0d5c37] shrink-0">
+                  <Leaf size={19} className="stroke-[1.75]" />
+                </span>
+                <span className="text-[11px] sm:text-[11.5px] font-bold leading-tight text-[#1a2d22]">
+                  Natural
+                  <br />
+                  Solutions
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <span className="text-[#0d5c37] shrink-0">
+                  <ShieldCheck size={19} className="stroke-[1.75]" />
+                </span>
+                <span className="text-[11px] sm:text-[11.5px] font-bold leading-tight text-[#1a2d22]">
+                  Expert
+                  <br />
+                  Guidance
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <span className="text-[#0d5c37] shrink-0">
+                  <Heart size={19} className="stroke-[1.75]" />
+                </span>
+                <span className="text-[11px] sm:text-[11.5px] font-bold leading-tight text-[#1a2d22]">
+                  Holistic
+                  <br />
+                  Wellness
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <span className="text-[#0d5c37] shrink-0">
+                  <UserRound size={19} className="stroke-[1.75]" />
+                </span>
+                <span className="text-[11px] sm:text-[11.5px] font-bold leading-tight text-[#1a2d22]">
+                  Better
+                  <br />
+                  You
+                </span>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -110,7 +171,7 @@ export default async function WellnessPage() {
 
       {/* simple steps */}
       <section className="bg-white pb-12">
-        <div className="mx-auto max-w-[1240px] px-4">
+        <div className="mx-auto max-w-[1380px] px-4">
           <Reveal variant="zoom">
             <div className="grid gap-6 rounded-2xl border border-[#e4eee3] bg-[#f3f9f2] p-7 lg:grid-cols-[0.85fr_2fr]">
               <div>
@@ -153,7 +214,7 @@ export default async function WellnessPage() {
 
       {/* featured articles */}
       <section id="featured" className="scroll-mt-24 bg-white pb-14">
-        <div className="mx-auto max-w-[1240px] px-4">
+        <div className="mx-auto max-w-[1380px] px-4">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <Reveal>
               <Eyebrow>Featured Articles</Eyebrow>

@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { useEffect, useState } from "react";
 import { Check, Heart, Leaf, Minus, Plus, ShieldCheck, ShoppingCart, Truck } from "lucide-react";
 import { rupees, type UIProduct } from "@/lib/types";
@@ -14,16 +16,27 @@ export default function ProductModal({ product, onClose }: { product: UIProduct 
   const [qty, setQty] = useState(1);
   const [size, setSize] = useState(0);
   const [tab, setTab] = useState<(typeof TABS)[number]>("Description");
+  const [activeImg, setActiveImg] = useState<string>("");
 
   useEffect(() => {
     if (product) {
       setQty(1);
       setSize(0);
       setTab("Description");
+      setActiveImg(product.image);
     }
   }, [product]);
 
   if (!product) return null;
+
+  const currentImg = activeImg || product.image;
+  const hasBackView = product.slug.includes("shilajit");
+  const gallery = hasBackView
+    ? [
+        { label: "Front", src: "/images/swarn-shilajit.jpg" },
+        { label: "Ingredients / Back", src: "/images/swarn-shilajit-back.jpg" },
+      ]
+    : [{ label: "Product", src: product.image }];
 
   const off = Math.round(((product.mrp - product.price) / product.mrp) * 100);
   const saved = wishlist.includes(product.id);
@@ -42,10 +55,32 @@ export default function ProductModal({ product, onClose }: { product: UIProduct 
           </span>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={product.image}
+            src={currentImg}
             alt={product.name}
-            className="animate-floaty h-56 w-full max-w-[290px] object-contain sm:h-72"
+            className="animate-floaty h-56 w-full max-w-[290px] rounded-xl object-contain sm:h-72"
           />
+
+          {hasBackView && (
+            <div className="mt-3 flex items-center justify-center gap-2">
+              {gallery.map((g) => (
+                <button
+                  key={g.src}
+                  type="button"
+                  onClick={() => setActiveImg(g.src)}
+                  className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-[11px] font-semibold transition ${
+                    currentImg === g.src
+                      ? "border-[#0d5c37] bg-[#0d5c37] text-white shadow-sm"
+                      : "border-[#d8e7d7] bg-white text-[#2c3b33] hover:border-[#0d5c37]"
+                  }`}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={g.src} alt="" className="h-5 w-5 rounded object-cover" />
+                  {g.label}
+                </button>
+              ))}
+            </div>
+          )}
+
           <div className="mt-5 grid w-full grid-cols-3 gap-2">
             {[
               { icon: Leaf, label: "100% Natural" },
@@ -143,6 +178,14 @@ export default function ProductModal({ product, onClose }: { product: UIProduct 
               <Heart size={17} className={saved ? "fill-[#0d5c37]" : ""} />
             </button>
           </div>
+
+          <Link
+            href={`/shop/${product.slug}`}
+            onClick={onClose}
+            className="mt-3.5 inline-flex items-center justify-center gap-1.5 text-xs font-bold text-[#0d5c37] hover:underline"
+          >
+            Open Dedicated Product Page &amp; Write a Review →
+          </Link>
 
           {/* tabs */}
           <div className="mt-6 flex gap-5 border-b border-[#e3ece4]">

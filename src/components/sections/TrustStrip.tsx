@@ -1,21 +1,21 @@
-import { CreditCard, Headphones, Heart, Leaf, ShieldCheck, Truck } from "lucide-react";
+import { Award, CreditCard, Headphones, Heart, Leaf, ShieldCheck, Star, Truck } from "lucide-react";
 import Reveal from "@/components/Reveal";
 
 const BASE = [
-  { icon: Leaf, title: "100% Natural", sub: "Ingredients" },
-  { icon: ShieldCheck, title: "Quality", sub: "Assured" },
-  { icon: Truck, title: "Fast & Reliable", sub: "Shipping" },
-  { icon: Headphones, title: "Expert Doctor", sub: "Support" },
-  { icon: Heart, title: "Your Wellness", sub: "Our Priority" },
+  { icon: Star, title: "5.0 ★ Rated", sub: "Google Maps & Justdial" },
+  { icon: Leaf, title: "100% Herbal", sub: "Zero Side Effects" },
+  { icon: Award, title: "Est. 2015", sub: "10+ Years in Hisar" },
+  { icon: Headphones, title: "Dr. N.K. Sharma", sub: "Direct Doctor Care" },
+  { icon: ShieldCheck, title: "Bina Operation", sub: "Non-Surgical Care" },
 ];
 
 const SHOP = [
+  { icon: Star, title: "5.0 ★ Rated", sub: "Google Maps & Justdial" },
   { icon: Leaf, title: "100% Natural", sub: "Ingredients" },
-  { icon: ShieldCheck, title: "Quality", sub: "Assured" },
+  { icon: ShieldCheck, title: "Quality Assured", sub: "FSSAI & GMP Certified" },
   { icon: Truck, title: "Free Shipping", sub: "Above ₹500" },
-  { icon: Headphones, title: "Expert Doctor", sub: "Support" },
-  { icon: CreditCard, title: "Secure", sub: "Payments" },
-  { icon: Heart, title: "Your Wellness", sub: "Our Priority" },
+  { icon: Headphones, title: "Clinic Helpline", sub: "+91 93067 37990" },
+  { icon: CreditCard, title: "Secure Checkout", sub: "UPI, Cards & COD" },
 ];
 
 export default function TrustStrip({ variant = "home" }: { variant?: "home" | "shop" }) {
@@ -23,7 +23,7 @@ export default function TrustStrip({ variant = "home" }: { variant?: "home" | "s
   return (
     <section className="border-y border-[#eef3ed] bg-white py-7">
       <div
-        className={`mx-auto grid max-w-[1240px] grid-cols-2 gap-5 px-4 sm:grid-cols-3 ${
+        className={`mx-auto grid max-w-[1380px] grid-cols-2 gap-5 px-4 sm:grid-cols-3 ${
           variant === "shop" ? "lg:grid-cols-6" : "lg:grid-cols-5"
         }`}
       >

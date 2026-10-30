@@ -4,17 +4,25 @@ import "./globals.css";
 import StoreProvider from "@/components/store/StoreProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
 export const metadata: Metadata = {
   title: "NLC Herbal — Natural Wellness. Expert Care.",
   description:
     "Discover the power of nature with authentic herbal products and get expert guidance from our trusted doctors — all in one place.",
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="icon" href="/icon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/icon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -27,6 +35,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Header />
           <main>{children}</main>
           <Footer />
+          <WhatsAppButton />
         </StoreProvider>
       </body>
     </html>

@@ -129,3 +129,8 @@ export async function getProductsWithReviews(): Promise<ProductWithReviews[]> {
       (seedReviews[p.slug] ?? []).map((r, i) => ({ id: i + 1, author: r.author, rating: r.rating, body: r.body })),
   }));
 }
+
+export async function getProductBySlug(slug: string): Promise<ProductWithReviews | null> {
+  const all = await getProductsWithReviews();
+  return all.find((p) => p.slug === slug) ?? null;
+}

@@ -31,7 +31,7 @@ export default async function HomePage() {
   ]);
 
   const products = productRows.map(toUIProduct);
-  const trusted = products.filter((p) => ["swarn-shilajit", "kamdev-power"].includes(p.slug));
+  const trusted = products.filter((p) => ["kamdev-power", "swarn-shilajit", "herbal-cough-powder"].includes(p.slug));
   const categories = categoryRows.map(toUICategory);
   const articles = articleRows.map(toUIArticle);
   const testimonials = testimonialRows.map(toUITestimonial);
@@ -45,7 +45,7 @@ export default async function HomePage() {
 
       {/* quick actions */}
       <section className="bg-white py-8">
-        <div className="mx-auto grid max-w-[1240px] gap-4 px-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto grid max-w-[1380px] gap-4 px-4 sm:grid-cols-2 lg:grid-cols-4">
           {QUICK_ACTIONS.map((a, i) => (
             <Reveal key={a.title} delay={i * 90}>
               <Link
@@ -67,63 +67,32 @@ export default async function HomePage() {
       </section>
 
       {/* best sellers */}
-      <section className="bg-white py-10">
-        <div className="mx-auto max-w-[1240px] px-4">
-          <div className="relative flex items-center justify-center">
-            <Reveal className="text-center">
+      <section className="bg-white py-12 lg:py-14">
+        <div className="mx-auto max-w-[1380px] px-4">
+          <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
+            <Reveal>
               <Eyebrow>Our Best Sellers</Eyebrow>
               <SectionTitle className="mt-1.5">Trusted Herbal Products</SectionTitle>
               <LeafDivider />
             </Reveal>
-            <div className="absolute right-0 hidden sm:block">
-              <ViewAllPill label="View All Products" href="/shop" />
-            </div>
+            <Reveal delay={100}>
+              <ViewAllPill label="View All Products" href="/products" />
+            </Reveal>
           </div>
 
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
             {trusted.map((p, i) => (
               <Reveal key={p.id} delay={i * 110}>
                 <HomeProductCard product={p} />
               </Reveal>
             ))}
-
-            <Reveal delay={220}>
-              <div className="card-hover relative flex h-full flex-col justify-center overflow-hidden rounded-2xl border border-[#e4eee3] bg-gradient-to-br from-[#eaf5e8] to-[#dceedb] p-6">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={PX.mortarWhite}
-                  alt="Herbal mortar and pestle"
-                  className="animate-floaty pointer-events-none absolute -right-6 -bottom-6 h-44 w-44 rounded-2xl object-cover opacity-90"
-                />
-                <div className="relative z-10 max-w-[200px]">
-                  <p className="text-[10.5px] font-semibold tracking-[0.18em] text-[#58705f] uppercase">
-                    Natural Solutions
-                  </p>
-                  <h3 className="font-display mt-2 text-[22px] leading-[1.15] font-extrabold">
-                    Herbal Care
-                    <br />
-                    for a Healthier
-                    <br />
-                    Tomorrow
-                  </h3>
-                  <p className="mt-3 text-[12px] leading-relaxed text-[#50635a]">
-                    Traditional wisdom.
-                    <br />
-                    Modern well-being.
-                  </p>
-                  <Link href="/shop" className="btn btn-primary mt-5 px-4 py-2.5 text-[12px]">
-                    Explore All Products
-                  </Link>
-                </div>
-              </div>
-            </Reveal>
           </div>
         </div>
       </section>
 
       {/* book an appointment */}
       <section className="bg-white pb-12">
-        <div className="mx-auto max-w-[1240px] px-4">
+        <div className="mx-auto max-w-[1380px] px-4">
           <Reveal variant="zoom">
             <div className="relative overflow-hidden rounded-2xl border border-[#e2efe1] bg-gradient-to-r from-[#eef7ec] via-[#f2f9f0] to-[#e6f2e4]">
               <div className="grid items-center gap-6 p-7 md:grid-cols-[1.05fr_0.95fr] md:p-9">
@@ -140,19 +109,10 @@ export default async function HomePage() {
                 <div className="relative hidden md:block">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/images/doctor-hero.png"
+                    src="/images/doctor-consulting.jpg"
                     alt="Expert doctor"
                     className="ml-auto h-[260px] w-[300px] rounded-2xl object-cover object-top"
                   />
-                  <div className="absolute top-6 -right-1 hidden lg:block">
-                    <p className="script text-[24px] leading-[1.05] font-semibold text-[#0d5c37]">
-                      Your
-                      <br />
-                      Health
-                      <br />
-                      Matters
-                    </p>
-                  </div>
                 </div>
               </div>
             </div>
@@ -162,7 +122,7 @@ export default async function HomePage() {
 
       {/* categories */}
       <section className="bg-white pb-12">
-        <div className="mx-auto max-w-[1240px] px-4">
+        <div className="mx-auto max-w-[1380px] px-4">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <Reveal>
               <Eyebrow>Explore by Category</Eyebrow>
@@ -201,7 +161,7 @@ export default async function HomePage() {
 
       {/* blog */}
       <section className="bg-white pb-14">
-        <div className="mx-auto max-w-[1240px] px-4">
+        <div className="mx-auto max-w-[1380px] px-4">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <Reveal>
               <Eyebrow>Wellness Journal</Eyebrow>

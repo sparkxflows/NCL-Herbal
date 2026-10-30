@@ -15,6 +15,7 @@ import ProductModal from "./ProductModal";
 import DoctorModal from "./DoctorModal";
 import AuthModal from "./AuthModal";
 import Toasts from "./Toasts";
+import FloatingCheckoutBar from "./FloatingCheckoutBar";
 
 type CartState = { items: CartLine[]; subtotal: number; count: number };
 
@@ -98,22 +99,54 @@ export default function StoreProvider({ children }: { children: ReactNode }) {
   );
 
   const updateQty = useCallback(async (id: number, quantity: number) => {
-    const res = await fetch("/api/cart", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, quantity }),
+    // Instant optimistic update for 0ms lag
+    setCart((prev) => {
+      let nextItems = prev.items.map((i) => (i.id === id ? { ...i, quantity } : i));
+      if (quantity <= 0) {
+        nextItems = nextItems.filter((i) => i.id !== id);
+      }
+      const subtotal = nextItems.reduce((s, i) => s + i.price * i.quantity, 0);
+      const count = nextItems.reduce((s, i) => s + i.quantity, 0);
+      return { items: nextItems, subtotal, count };
     });
-    if (res.ok) setCart((await res.json()) as CartState);
+
+    try {
+      const res = await fetch("/api/cart", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, quantity }),
+      });
+      if (res.ok) setCart((await res.json()) as CartState);
+    } catch {
+      /* silently handled or recovered on next fetch */
+    }
   }, []);
 
   const removeItem = useCallback(async (id: number) => {
-    const res = await fetch(`/api/cart?id=${id}`, { method: "DELETE" });
-    if (res.ok) setCart((await res.json()) as CartState);
+    // Instant optimistic update
+    setCart((prev) => {
+      const nextItems = prev.items.filter((i) => i.id !== id);
+      const subtotal = nextItems.reduce((s, i) => s + i.price * i.quantity, 0);
+      const count = nextItems.reduce((s, i) => s + i.quantity, 0);
+      return { items: nextItems, subtotal, count };
+    });
+
+    try {
+      const res = await fetch(`/api/cart?id=${id}`, { method: "DELETE" });
+      if (res.ok) setCart((await res.json()) as CartState);
+    } catch {
+      /* silently handled */
+    }
   }, []);
 
   const clearCart = useCallback(async () => {
-    const res = await fetch("/api/cart", { method: "DELETE" });
-    if (res.ok) setCart((await res.json()) as CartState);
+    setCart(EMPTY);
+    try {
+      const res = await fetch("/api/cart", { method: "DELETE" });
+      if (res.ok) setCart((await res.json()) as CartState);
+    } catch {
+      /* silently handled */
+    }
   }, []);
 
   const toggleWishlist = useCallback(
@@ -159,6 +192,7 @@ export default function StoreProvider({ children }: { children: ReactNode }) {
       <DoctorModal doctor={doctor} onClose={() => setDoctor(null)} />
       <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} />
       <Toasts toasts={toasts} />
+      <FloatingCheckoutBar />
     </StoreContext.Provider>
   );
 }

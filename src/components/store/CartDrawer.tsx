@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
+import { MessageCircle, Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import { rupees } from "@/lib/types";
 import { useStore } from "./StoreProvider";
 
@@ -24,6 +24,15 @@ export default function CartDrawer({ open, onClose }: { open: boolean; onClose: 
   if (!open) return null;
 
   const shipping = cart.subtotal > 0 && cart.subtotal < 500 ? 49 : 0;
+  const total = cart.subtotal + shipping;
+
+  const orderLines = cart.items
+    .map((item) => `• ${item.quantity}x ${item.name} (${rupees(item.price * item.quantity)})`)
+    .join("\n");
+  const waText = encodeURIComponent(
+    `Namaste Dr. N.K. Sharma / NLC Herbal,\nI would like to place an order from your website:\n\n${orderLines}\n\nTotal Amount: ${rupees(total)}\n\nPlease confirm my order and share delivery details.`
+  );
+  const waUrl = `https://wa.me/919306737990?text=${waText}`;
 
   const checkout = async () => {
     setPlacing(true);
@@ -127,7 +136,7 @@ export default function CartDrawer({ open, onClose }: { open: boolean; onClose: 
             <div className="mt-2 flex items-center justify-between border-t border-dashed border-[#d6e4d6] pt-2">
               <span className="font-display font-bold">Total</span>
               <span className="font-display text-lg font-extrabold text-[#0d5c37]">
-                {rupees(cart.subtotal + shipping)}
+                {rupees(total)}
               </span>
             </div>
             <button
@@ -137,9 +146,18 @@ export default function CartDrawer({ open, onClose }: { open: boolean; onClose: 
             >
               {placing ? "Placing order…" : "Proceed to Checkout"}
             </button>
+            <a
+              href={waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2.5 flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] py-2.5 text-[13px] font-bold text-white shadow-xs transition hover:bg-[#20ba59] hover:shadow-sm"
+            >
+              <MessageCircle size={16} className="fill-white" />
+              Quick Order via WhatsApp
+            </a>
             <button
               onClick={clearCart}
-              className="mt-2 w-full text-center text-xs font-medium text-[#5e6f66] underline-offset-2 transition hover:text-[#b3261e] hover:underline"
+              className="mt-2.5 w-full text-center text-xs font-medium text-[#5e6f66] underline-offset-2 transition hover:text-[#b3261e] hover:underline"
             >
               Clear cart
             </button>

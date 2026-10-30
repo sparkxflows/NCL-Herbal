@@ -6,9 +6,9 @@ import { Eyebrow, SectionTitle } from "@/components/ui/Section";
 export const metadata = { title: "Contact — NLC Herbal" };
 
 const INFO = [
-  { icon: Phone, title: "Call Us", lines: ["+91 98765 43210", "Mon – Sat, 9 AM – 7 PM"] },
-  { icon: Mail, title: "Email Us", lines: ["care@nlcherbal.com", "support@nlcherbal.com"] },
-  { icon: MapPin, title: "Visit Us", lines: ["NLC Herbal Wellness Centre", "Sector 44, Gurugram, India"] },
+  { icon: Phone, title: "Call Us", lines: ["+91 93067 37990", "Mon – Sat, 9 AM – 7 PM"] },
+  { icon: Mail, title: "Email Us", lines: ["info@nlcherbal.in", "www.nlcherbal.com"] },
+  { icon: MapPin, title: "Clinic Address", lines: ["New Life Clinic (Dr. N.K. Sharma)", "ALG-21, Pushpa Complex, Hisar (Hry.)"] },
   { icon: Clock, title: "Doctor Support", lines: ["Online consultations", "Every day, 8 AM – 9 PM"] },
 ];
 
@@ -17,7 +17,7 @@ export default function ContactPage() {
     <>
       <section className="hero-grad relative overflow-hidden py-12">
         <Leaf className="animate-sway absolute top-4 -left-4 h-28 w-28 text-[#bedcbd]/35" />
-        <div className="mx-auto max-w-[1240px] px-4 text-center">
+        <div className="mx-auto max-w-[1380px] px-4 text-center">
           <Reveal>
             <Eyebrow>Help Center</Eyebrow>
             <SectionTitle className="mt-1.5">We&apos;re Here to Help You</SectionTitle>
@@ -30,7 +30,7 @@ export default function ContactPage() {
       </section>
 
       <section className="bg-white py-12">
-        <div className="mx-auto grid max-w-[1240px] gap-6 px-4 lg:grid-cols-[1fr_1.3fr]">
+        <div className="mx-auto grid max-w-[1380px] gap-6 px-4 lg:grid-cols-[1fr_1.3fr]">
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
             {INFO.map((c, i) => (
               <Reveal key={c.title} delay={i * 90}>
